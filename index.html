@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div class="clock">
+       <div class="clock-wrap">
+         <h2>the time is now</h2>
+         <div class="time">
+             <div id="hours"><span id="hour">00</span><span>hours</span></div>
+             <div id="minutes"><span id="minute">00</span><span>minutes</span></div>
+             <div id="seconds"><span id="second">00</span><span>seconds</span></div>
+         </div>
+        </div>
+   </div>
+   <!--calender html-->
+   <div class="calendar-wrap">
+    <div id="calendar">
+        <p id="monthName"></p>
+        <p id="dayName"></p>
+        <p id="dayNumber"></p>
+        <p id="year"></p>
+ 
+ 
+    </div>
+   </div>
+      <!--email validation html-->
+
+      <div class="validation-wrap">
+          <div id="email-validation">
+              <h3>Check your email</h3>
+              <form id="form" action="#">
+                  <div id="inputBox">
+                      <input type="text" id="email" placeholder="ENTER EMAIL ADDRESS" onkeydown="validation()">
+                      <h2 id="text"></h2>
+                  </div>
+
+              </form>
+          </div>
+      </div>
+
+
+
+   <!--js code--------------------->
+
+   <script>
+       //timer
+       function clock(){
+           var hours = document.getElementById('hour');
+           var minutes = document.getElementById('minute');
+           var seconds = document.getElementById('second');
+           var h = new Date().getHours();
+           var m = new Date().getMinutes();
+           var s = new Date().getSeconds();
+           hours.innerHTML = h;
+           minutes.innerHTML = m;
+           seconds.innerHTML = s;
+
+
+       }
+       var interval = setInterval(clock,1000);
+       ///calender
+
+       const lang = navigator.language;
+       let date = new Date();
+
+       let dayNumber = date.getDate();
+       let month = date.getMonth();
+       let dayName = date.toLocaleString(lang,{weekday: 'long'});
+       let monthName = date.toLocaleString(lang,{month: 'long'});
+       let year = date.getFullYear();
+
+       document.getElementById('monthName').innerHTML = monthName;
+       document.getElementById('dayName').innerHTML = dayName;
+       document.getElementById('dayNumber').innerHTML =dayNumber; 
+       document.getElementById('year').innerHTML = year;
+       //////////email validation
+      function validation(){
+        var form = document.getElementById('form');
+       var email = document.getElementById('email').value;
+       var text = document.getElementById('text');
+       var pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+       if(email.match(pattern)){
+            form.classList.add('valid');
+            form.classList.remove('invalid');
+            text.innerHTML = "your email is valid"
+            text.style.color ="green"
+            text.style.background ="white"
+            text.style.textAlign ="center"
+            text.style.textTransform ="capitaLize"
+            text.style.marginTop ="10px"
+            text.style.padding ="10px"
+
+       }
+       else{
+        form.classList.remove('valid');
+        form.classList.add('invalid');
+        text.innerHTML = "your email is invalid"
+        text.style.color ="red"
+        text.style.background ="white"
+        text.style.textAlign ="center"
+        text.style.textTransform ="capitaLize"
+        text.style.marginTop ="10px"
+        text.style.padding ="10px"
+
+
+
+
+
+
+
+
+       }
+
+      }
+
+   </script>
+</body>
+</html>
